@@ -2,13 +2,16 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useTitle } from "../hooks/useTitle";
+
 export const MovieDetail = () => {
   const params = useParams();
-  const [data, setData] = useState([]);
-  useTitle(`${data.original_title}`);
-  const image = data.poster_path
+  const [data, setData] = useState(null); // Initialize as null
+  useTitle(`${data?.original_title || 'Loading...'}`); // Use optional chaining
+
+  const image = data?.poster_path
     ? `https://image.tmdb.org/t/p/w500/${data.poster_path}`
     : "No Result Found";
+
   useEffect(() => {
     async function fetchMovie() {
       const res = await fetch(
@@ -18,7 +21,11 @@ export const MovieDetail = () => {
       setData(json);
     }
     fetchMovie();
-  }, []);
+  }, [params.id]);
+
+  if (!data) {
+    return <div>Loading...</div>; // Display a loading message while data is being fetched
+  }
 
   return (
     <main>
