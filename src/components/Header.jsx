@@ -42,8 +42,8 @@ export const Header = () => {
               className="h-8"
               alt="Cinemate Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Cinemate
+            <span className="self-center md:block hidden text-2xl font-semibold whitespace-nowrap dark:text-white">
+              CineMate
             </span>
           </Link>
           <div className="flex md:order-2">
